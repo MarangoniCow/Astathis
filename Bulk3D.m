@@ -1,20 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   BULK3D      Eigenvalue problem for unbounded 3D regime
+%
+%   Corresponding parameter class is `ActiveParameters'.
 
 
 
 
-classdef Bulk3D < EigenvalueProblemClass
+classdef Bulk3D < EigenvalueProblems
 
-    properties (Constant)
-        parameterNames  = {'s', 'lambda1', 'lambda2', 'xi', 'eta', 'k', 'q', 'qd'};
-        eig             = sym('omega');
-        dimension       = 6;
-        rank            = 4;
+    % Can be set
+    properties (Constant) 
+        dataClassName       = 'ActiveParameters';
+        eigvecLatinNames    = {'uk', 'vk', 'wk', 'Pk', 'thk', 'phk'};
+        eigvecDisplayNames  = {'$u_k$', '$v_k$', '$w_k$', '$P_k$', '$\theta_k$', '$\phi_k$'};
+        eig                 = sym('omega');
+        rank                = 5;
     end
 
     methods 
         function M = fetchEigenvalueMatrix(this, para)
 
-            this.validateParameterNames(para);
+            this.validateParameters(para);
 
 
             % LOCAL VARIABLES:
