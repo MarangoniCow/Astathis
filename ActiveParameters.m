@@ -29,7 +29,8 @@ classdef ActiveParameters < DataClass
                 namedArgs.lambda2   = 0.1;
                 namedArgs.xi        = 1.1;
                 namedArgs.eta       = 0.8;
-                namedArgs.k         = 1;
+                namedArgs.A         = 0.1;
+                namedArgs.k         = 0.5;
                 namedArgs.q         = 0;
                 namedArgs.qd        = 0
             end
@@ -40,6 +41,7 @@ classdef ActiveParameters < DataClass
             obj.lambda2     = namedArgs.lambda2;
             obj.xi          = namedArgs.xi;
             obj.eta         = namedArgs.eta;
+            obj.A           = namedArgs.A;
 
             obj.k   = namedArgs.k;
             obj.q   = namedArgs.q;

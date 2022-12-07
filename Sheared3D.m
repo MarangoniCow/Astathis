@@ -6,7 +6,7 @@
 
 
 
-classdef Bulk3D < EigenvalueProblems
+classdef Sheared3D < EigenvalueProblems
 
     % Can be set
     properties (Constant) 
@@ -30,6 +30,7 @@ classdef Bulk3D < EigenvalueProblems
             lambda2 = para.lambda2;
             xi      = para.xi;
             invEta  = 1./para.eta;
+            A       = para.A;
 
             %   Perturbation parameters 
             k       = para.k;
@@ -53,8 +54,8 @@ classdef Bulk3D < EigenvalueProblems
             M(1, :) = [kappa1, 0, 0, -1i*kx, 1i*s*ky, 1i*s*kz];
             M(2, :) = [0, kappa1, 0, -1i*ky, 1i*s*kx, 0];
             M(3, :) = [0, 0, kappa1, -1i*kz, 0, 1i*s*kx];
-            M(4, :) = [ln*ky + lambda2*kz/2, lp*kx, lambda2*kx/2, 0, kappa2, 0];
-            M(5, :) = [ln*kz - lambda2*ky/2, -lambda2*kx/2, lp*kx, 0, 0, kappa2];
+            M(4, :) = [ln*ky + lambda2*kz/2, lp*kx, lambda2*kx/2, 0, kappa2 - 1i*A*lambda2/2, -1i*A*ln];
+            M(5, :) = [ln*kz - lambda2*ky/2, -lambda2*kx/2, lp*kx, 0, -1i*A*lp, kappa2 + 1i*A*lambda2/2];
             M(6, :) = [kx, ky, kz, 0, 0, 0];
         end
 
