@@ -17,7 +17,10 @@ classdef Bulk3D < EigenvalueProblems
         rank                = 4;
     end
 
-    methods 
+    methods
+
+        
+
         function M = fetchEigenvalueMatrix(this, para)
 
             this.validateParameters(para);

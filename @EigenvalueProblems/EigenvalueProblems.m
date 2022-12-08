@@ -15,8 +15,9 @@ classdef (Abstract) EigenvalueProblems < handle
         rank;
     end
 
-    properties
+    properties (SetAccess = protected, GetAccess = public)
         dimension;
+        options;
     end
 
 
@@ -36,7 +37,10 @@ classdef (Abstract) EigenvalueProblems < handle
 
     methods
         [eigvals, eigvecs] = findEigenvalues(this, para);
+        setOptions(this, namedArgs);
     end
+
+   
 
     methods (Access = protected)
         function this = EigenvalueProblems
@@ -56,6 +60,9 @@ classdef (Abstract) EigenvalueProblems < handle
 
             % Set dimension length
             this.dimension = length(this.eigvecLatinNames);
+            
+            % Set options
+            this.options = struct('normalise', false, 'normalisationidx', 1);
         end
     end
 

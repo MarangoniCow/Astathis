@@ -1,3 +1,4 @@
 *.asv
 bulk3dgraph.m
 findEigenvectors3D.m
+TestScript.m

@@ -20,14 +20,19 @@ function [eigvals, eigvecs] = findEigenvalues(this, para)
 
     if(this.rank ~= length(eigvals))
         warning(['Unexpected number of eigenvalues, expected ', ...
-            this.rank, ', received ', length(eigvals)])
+            num2str(this.rank), ', received ', num2str(length(eigvals))])
     end
-
-
 
     % Substitute the eigenvalues into M
     for k = 1:this.rank
         D = double(subs(M, this.eig, symbolic_eigenvals(k)));
         eigvecs(k, :) = double(null(D));
+    end
+
+    if this.options.normalise
+        for k = 1:this.rank
+            eigvecs(k, :) = eigvecs(k, :)./eigvecs(k, this.options.normalisationidx);
+        end
+
     end
 end
