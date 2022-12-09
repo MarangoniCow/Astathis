@@ -1,6 +1,6 @@
 function [eigvals, eigvecs] = findEigenvalues(this, para)
 % FINDEIGENVALUES       Finds the eigenvalues and eigenvectors for a
-%                       linearised matrix.
+% a linearised eigenvalue problem. 
 %
 
     % Validate input parameters
@@ -29,10 +29,11 @@ function [eigvals, eigvecs] = findEigenvalues(this, para)
         eigvecs(k, :) = double(null(D));
     end
 
+    % TO DO: Make normalise a seperate method
+
     if this.options.normalise
         for k = 1:this.rank
             eigvecs(k, :) = eigvecs(k, :)./eigvecs(k, this.options.normalisationidx);
         end
-
     end
 end

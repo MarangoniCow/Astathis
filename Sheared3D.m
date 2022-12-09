@@ -14,6 +14,7 @@ classdef Sheared3D < EigenvalueProblems
         eigvecLatinNames    = {'uk', 'vk', 'wk', 'Pk', 'thk', 'phk'};
         eigvecDisplayNames  = {'$u_k$', '$v_k$', '$w_k$', '$P_k$', '$\theta_k$', '$\phi_k$'};
         eig                 = sym('omega');
+        eigDisplayName      = '$\omega$';
         rank                = 4;
     end
 

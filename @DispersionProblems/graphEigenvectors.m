@@ -1,35 +1,34 @@
-
-
-
-
 function fig = graphEigenvectors(this)
+% graphEigenvectors(this)   Graph eigenvector data.
 
 
-    
+     % Checks on eigenvalues
+    if isempty(this.eigenvectors)
+        warning('No eigenvectors found. Have you run findSolutions?')
+    end
+
 
     n = this.EigenObj.dimension;
-    m = 1;
+    for m = 1:this.EigenObj.rank
 
-    fig = figure;
-    for i = 1:n
-        
-        plot(this.SOIval, real(this.V(:, m, i)), 'LineStyle', '--', ...
-            'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
-            'DisplayName', this.EigenObj.eigvecDisplayNames{i});
-        hold on
-        plot(this.SOIval, imag(this.V(:, m, i)), 'LineStyle', '-', ...
-            'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
-            'DisplayName', this.EigenObj.eigvecDisplayNames{i});
-    end
-    hold off
+        fig = figure;
+        PlotDefaults.setLatexDefault;
     
-    legend;
-    xlabel(['$', this.SOI, '$'], 'interpreter', 'latex');
-    PlotDefaults.applySizes('std');
+        for i = 1:n
+            
+            plot(this.SOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
+                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'DisplayName', this.EigenObj.eigvecDisplayNames{i});
+            hold on
+            plot(this.SOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
+                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'DisplayName', this.EigenObj.eigvecDisplayNames{i});
+        end
+        hold off
+        
+        legend;
+        xlabel(['$', this.SOI, '$'], 'interpreter', 'latex');
+        PlotDefaults.applySizes('std');
 
-
-
-
-
-
+    end
 end

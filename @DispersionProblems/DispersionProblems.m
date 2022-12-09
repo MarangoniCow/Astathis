@@ -1,49 +1,50 @@
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   DISPERSIONPROBLEMS      The class DispersionProblems acts on an
+%   EigenvalueProblems object to produce 
+%
 
 
 classdef DispersionProblems < handle
 
-    properties
-        SOI
-        SOIval
-        EigenObj
-        E
-        V
+    % TO DO: Value checking
 
+    properties
+        DOI;                    % Dispersion variable of interest (typically k)
+        DOIval;                 % DIspersion variable's value of interest  (Should be a range)
+        EigenObj;               % Eigen problem to solve
+        eigenvalues;            % Resultant eigenvalues
+        eigenvectors;           % Resultant eigenvectors
+    end
+
+
+    % TO DO: Set default options
+    properties (SetAccess = protected, GetAccess = public)
+        options
     end
 
     
     methods (Access = public)
         function this = DispersionProblems(EigenObj, SOI, SOIval)
+            % DispersionProblems(EigenObj, SOI, SOIval) construcor: Sets
+            % the EigenvalueProblems object, the sweep variable of interest
+            % and the sweep variable's value of interest
+
+            % TO FIX: No value checking.
             
             this.EigenObj   = EigenObj;
-            this.SOI        = SOI;
-            this.SOIval     = SOIval;
+            this.DOI        = SOI;
+            this.DOIval     = SOIval;
 
         end
     end
-    
 
+    % Externally-defined methods
     methods
         fig = graphEigenvectors(this);
         fig = graphDispersion(this);
-    end
+        findSolutions(this, para);
 
-    methods
-
-        
-        function FindSolutions(this, para)
-                
-            n = length(this.SOIval);
-
-            this.E = zeros(n, this.EigenObj.rank);
-            this.V = zeros(n, this.EigenObj.rank, this.EigenObj.dimension);
-
-            for i = 1:length(this.SOIval)
-                para.(this.SOI) = this.SOIval(i);
-                [this.E(i, :), this.V(i, :, :)] = this.EigenObj.findEigenvalues(para);
-            end
-
-        end
+        % TO DO: Set default options
+        setOptions(varargin);        
     end
 end
