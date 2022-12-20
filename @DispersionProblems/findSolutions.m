@@ -1,6 +1,6 @@
 function findSolutions(this, para)
             % FINDSOLUTIONS(THIS,PARA)  Main method: Iterates over the
-            % SOIval (Sweep Variable Of Interest) 
+            % DOIval (Sweep Variable Of Interest) 
 
             % Fetch the sweep length
             n = length(this.DOIval);

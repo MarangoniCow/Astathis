@@ -9,25 +9,25 @@ function fig = graphEigenvectors(this)
 
 
     n = this.EigenObj.dimension;
-    for m = 1:this.EigenObj.rank
+    for m = 1
 
         fig = figure;
         PlotDefaults.setLatexDefault;
     
-        for i = 1:n
+        for i = 6
             
-            plot(this.SOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
-                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
+            plot(this.DOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
+                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', this.EigenObj.eigvecDisplayNames{i});
             hold on
-            plot(this.SOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
-                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
+            plot(this.DOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
+                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', this.EigenObj.eigvecDisplayNames{i});
         end
         hold off
         
         legend;
-        xlabel(['$', this.SOI, '$'], 'interpreter', 'latex');
+        xlabel(['$', this.DOI, '$'], 'interpreter', 'latex');
         PlotDefaults.applySizes('std');
 
     end

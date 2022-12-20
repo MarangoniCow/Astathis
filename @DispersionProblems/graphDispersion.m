@@ -13,11 +13,11 @@ function fig = graphDispersion(this)
     fig = figure;
     for i = 1:this.EigenObj.rank
         
-        plot(this.SOIval, real(this.eigenvalues(:, i)), 'LineStyle', '--', ...
+        plot(this.DOIval, real(this.eigenvalues(:, i)), 'LineStyle', '--', ...
                 'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', this.EigenObj.eigDisplayName);
         hold on
-        plot(this.SOIval, imag(this.eigenvalues(:, i)), 'LineStyle', '-', ...
+        plot(this.DOIval, imag(this.eigenvalues(:, i)), 'LineStyle', '-', ...
                 'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', this.EigenObj.eigDisplayName);
 
@@ -26,6 +26,6 @@ function fig = graphDispersion(this)
     hold off
 
     legend;
-    xlabel(['$', this.SOI, '$']);
+    xlabel(['$', this.DOI, '$']);
     PlotDefaults.applySizes('std');
 end
