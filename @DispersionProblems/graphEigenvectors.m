@@ -16,18 +16,21 @@ function fig = graphEigenvectors(this)
     
         for i = 1:n
             
-            plot(this.SOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
-                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
-                'DisplayName', this.EigenObj.eigvecDisplayNames{i});
+            plot(this.DOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
+                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'DisplayName', ['Re(', this.EigenObj.eigvecDisplayNames{i}, ')']);
             hold on
-            plot(this.SOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
-                'Color', PlotDefaults.fetchColourByIdx(i), 'LineWidth', PlotDefaults.std.LineWidth, ...
-                'DisplayName', this.EigenObj.eigvecDisplayNames{i});
+        end
+        for i = 1:n
+            plot(this.DOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
+                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'DisplayName', ['Im(', this.EigenObj.eigvecDisplayNames{i}, ')']);
         end
         hold off
         
-        legend;
-        xlabel(['$', this.SOI, '$'], 'interpreter', 'latex');
+        PlotDefaults.setLatexDefault; 
+        legend('NumColumns', 2);
+        xlabel(['$', this.DOI, '$'], 'interpreter', 'latex');
         PlotDefaults.applySizes('std');
 
     end
