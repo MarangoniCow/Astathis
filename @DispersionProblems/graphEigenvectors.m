@@ -7,23 +7,39 @@ function fig = graphEigenvectors(this)
         warning('No eigenvectors found. Have you run findSolutions?')
     end
 
+    % SHEARED_CHIRAL_MATTER_SPECIFICS
+    
 
-    n = this.EigenObj.dimension;
+    eigDisplayName = this.EigenObj.eigDisplayName(2:end-1);
+
     for m = 1:this.EigenObj.rank
 
         fig = figure;
         PlotDefaults.setLatexDefault;
     
-        for i = 1:n
+        for i = [1, 2, 3, 5, 6]
             
+            if i > 3
+                j = i - 1;
+            else
+                j = i;
+            end
+
             plot(this.DOIval, real(this.eigenvectors(:, m, i)), 'LineStyle', '--', ...
-                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'Color', PlotDefaults.fetchColourByIdx(j, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', ['Re(', this.EigenObj.eigvecDisplayNames{i}, ')']);
             hold on
         end
-        for i = 1:n
+        for i = [1, 2, 3, 5, 6]
+
+            if i > 3
+                j = i - 1;
+            else
+                j = i;
+            end
+
             plot(this.DOIval, imag(this.eigenvectors(:, m, i)), 'LineStyle', '-', ...
-                'Color', PlotDefaults.fetchColourByIdx(i, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
+                'Color', PlotDefaults.fetchColourByIdx(j, 9), 'LineWidth', PlotDefaults.std.LineWidth, ...
                 'DisplayName', ['Im(', this.EigenObj.eigvecDisplayNames{i}, ')']);
         end
         hold off
@@ -32,6 +48,9 @@ function fig = graphEigenvectors(this)
         legend('NumColumns', 2);
         xlabel(['$', this.DOI, '$'], 'interpreter', 'latex');
         PlotDefaults.applySizes('std');
+
+        
+        title(['Eigenmodes for $', eigDisplayName, '_', num2str(m), '$'], 'Interpreter', 'latex');
 
     end
 end

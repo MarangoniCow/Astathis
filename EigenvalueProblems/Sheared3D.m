@@ -18,7 +18,14 @@ classdef Sheared3D < EigenvalueProblems
         rank                = 4;
     end
 
-    methods 
+    methods
+
+        function this = Sheared3D
+            % Set default options for all Sheared3D objects
+            this.setOptions('normalise', true, 'normalisationidx', 3);
+
+        end
+        
         function M = fetchEigenvalueMatrix(this, para)
 
             this.validateParameters(para);
